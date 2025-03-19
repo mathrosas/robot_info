@@ -2,6 +2,7 @@
 #include "ros/node_handle.h"
 #include "ros/publisher.h"
 #include "ros/ros.h"
+#include <string>
 
 class RobotInfo {
 protected:

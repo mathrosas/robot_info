@@ -8,8 +8,10 @@ project(robot_info)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  robotinfo_msgs
   roscpp
+  std_msgs
+  robotinfo_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -46,11 +48,10 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+  FILES
+  CustomRobotInfo.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -67,10 +68,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   robotinfo_msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+  robotinfo_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -102,9 +104,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES robot_info
-#  CATKIN_DEPENDS robotinfo_msgs roscpp
+ INCLUDE_DIRS include
+ LIBRARIES robot_info
+ CATKIN_DEPENDS robotinfo_msgs roscpp
 #  DEPENDS system_lib
 )
 
@@ -115,7 +117,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -132,7 +134,11 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/robot_info_node.cpp)
+add_executable(robot_info_node src/robot_info_main.cpp src/robot_info_class.cpp)
+target_link_libraries(robot_info_node ${catkin_LIBRARIES})
+
+add_executable(agv_robot_info_node src/agv_robot_info_class.cpp src/robot_info_class.cpp)
+target_link_libraries(agv_robot_info_node ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

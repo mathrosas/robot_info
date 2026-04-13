@@ -1,6 +1,6 @@
 # Checkpoint 3 - Advanced C++ Part 1
 
-C++ ROS node that publishes robot information for a MiR100 mobile robot using **inheritance** and **composition** design patterns. This node serves as the data provider for a teleoperation GUI built in [Checkpoint 4](https://github.com/mathrosas).
+C++ ROS node that publishes robot information for a MiR100 mobile robot using **inheritance** and **composition** design patterns. This node serves as the data provider for a teleoperation GUI built in [Checkpoint 4](https://github.com/mathrosas/robot_gui).
 
 Part of the [ROS & ROS 2 Developer Master Class](https://www.theconstructsim.com/) certification (Phase 1).
 
